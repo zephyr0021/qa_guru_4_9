@@ -3,7 +3,7 @@ from allure_commons.types import Severity
 from selene import browser, by, be, have
 
 
-def test_git_with_selene():
+def test_git_with_selene(browser_manager):
     browser.open("https://github.com/")
     browser.element(".header-search-input").set_value("eroshenkoam/allure-example")
     browser.element(".header-search-input").submit()
@@ -11,15 +11,13 @@ def test_git_with_selene():
     browser.element("#issues-tab").click()
     browser.element(by.partial_text("#76")).should(have.text("#76"))
 
-
-def test_git_with_allure_steps():
-    allure.dynamic.tag("hw")
-    allure.dynamic.severity(Severity.BLOCKER)
-    allure.dynamic.epic("qa guru")
-    allure.dynamic.feature("Allure reports")
-    allure.dynamic.story("test with allure steps")
-    allure.dynamic.link("https://github.com", name="Testing")
-
+@allure.tag("hw")
+@allure.severity(Severity.BLOCKER)
+@allure.epic("qa guru")
+@allure.feature("Allure reports")
+@allure.story("test with allure decorator steps")
+@allure.link("https://github.com", name="Testing")
+def test_git_with_allure_steps(browser_manager):
     with allure.step("Открываем страницу в браузере"):
         browser.open("https://github.com/")
 
@@ -36,14 +34,13 @@ def test_git_with_allure_steps():
     with allure.step("Проверка необходимого # issue"):
         browser.element(by.partial_text("#76")).should(have.text("#76"))
 
-
-def test_git_with_allure_decorator_steps():
-    allure.dynamic.tag("hw")
-    allure.dynamic.severity(Severity.BLOCKER)
-    allure.dynamic.epic("qa guru")
-    allure.dynamic.feature("Allure reports")
-    allure.dynamic.story("test with allure decorator steps")
-    allure.dynamic.link("https://github.com", name="Testing")
+@allure.tag("hw")
+@allure.severity(Severity.BLOCKER)
+@allure.epic("qa guru")
+@allure.feature("Allure reports")
+@allure.story("test with allure decorator steps")
+@allure.link("https://github.com", name="Testing")
+def test_git_with_allure_decorator_steps(browser_manager):
     open_browser_page()
     search_repo("eroshenkoam/allure-example")
     go_to_repo("eroshenkoam/allure-example")
