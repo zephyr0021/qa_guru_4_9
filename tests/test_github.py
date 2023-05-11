@@ -69,7 +69,7 @@ def go_to_issues():
     browser.element("#issues-tab").click()
 
 
-@allure.step("Проверка необходимого issue {nubmer}")
-def check_issue(number):
-    browser.element(by.partial_text(number)).should(have.text(number))
+@allure.step("Проверка необходимого issue {number_issue}")
+def check_issue(number_issue):
+    browser.element(by.partial_text(number_issue)).should(have.text(number_issue))
 
